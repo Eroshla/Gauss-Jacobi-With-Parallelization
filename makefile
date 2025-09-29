@@ -1,10 +1,7 @@
-run:
-	./main
+SRC = main.cpp
 
-build:
-	g++ -o main main.cpp
-
-all: build run
+compile:
+	g++ -fopenmp $(SRC) -o app
 
 clean:
-	rm -f main
+	rm -f app
