@@ -43,7 +43,7 @@ int main() {
         return 1;
     }
 
-    const int max_iter = 500000;
+    const int max_iter = 1000000;
     const double tol = 1e-8;
 
     auto t0 = std::chrono::high_resolution_clock::now();
@@ -52,7 +52,7 @@ int main() {
     auto t1 = std::chrono::high_resolution_clock::now();
 
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
-    double mb = (1.0 * n * sizeof(double)) / (1024.0 * 1024.0); // apenas 1 vetor
+    double mb = (1.0 * n * sizeof(double)) / (1024.0 * 1024.0);
 
     std::cout << "\nResumo:\n";
     std::cout << " n = " << n << "\n";

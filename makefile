@@ -4,9 +4,7 @@ run:
 build:
 	g++ -o main main.cpp
 
-make:
-	g++ -o main main.cpp
-	./main
+all: build run
 
 clean:
 	rm -f main
