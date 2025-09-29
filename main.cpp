@@ -34,12 +34,9 @@ int main() {
     std::size_t n;
     double alpha;
 
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-
-    std::cout << "Digite n e alpha (ex: 200000 0.9999): ";
+    std::cout << "Digite n e alpha (ex: 200000 0.9999): " << std::flush;
     if (!(std::cin >> n >> alpha) || n < 2 || alpha <= 0.0 || alpha >= 1.0) {
-        std::cout << "Entrada invalida (n>=2 e 0<alpha<1).\n";
+        std::cout << "Entrada invalida (n>=2 e 0<alpha<1).\n" << std::flush;
         return 1;
     }
 
@@ -54,13 +51,13 @@ int main() {
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
     double mb = (1.0 * n * sizeof(double)) / (1024.0 * 1024.0);
 
-    std::cout << "\nResumo:\n";
-    std::cout << " n = " << n << "\n";
-    std::cout << " alpha = " << alpha << "\n";
-    std::cout << " iteracoes = " << iters << "\n";
-    std::cout << " erro (||x_k - x_{k-1}||_inf) = " << err << "\n";
-    std::cout << " tempo = " << ms << " ms (~" << (ms / 1000.0) << " s)\n";
-    std::cout << " memoria estimada (vetor x) ~ " << mb << " MB\n";
+    std::cout << "\nResumo:\n" << std::flush;
+    std::cout << " n = " << n << "\n" << std::flush;
+    std::cout << " alpha = " << alpha << "\n" << std::flush;
+    std::cout << " iteracoes = " << iters << "\n" << std::flush;
+    std::cout << " erro (||x_k - x_{k-1}||_inf) = " << err << "\n" << std::flush;
+    std::cout << " tempo = " << ms << " ms (~" << (ms / 1000.0) << " s)\n" << std::flush;
+    std::cout << " memoria estimada (vetor x) ~ " << mb << " MB\n" << std::flush;
 
     return 0;
 }
