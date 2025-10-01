@@ -22,10 +22,11 @@ static void jacobi(
 
     for (iters = 1; iters <= max_iter; ++iters) {
         double sum_x = 0.0;
+        #pragma omp parallel for reduction(+:sum_x)
         for (std::size_t i = 0; i < n; ++i) sum_x += x[i];
 
         double maxdiff = 0.0;
-        #pragma omp parallel for num_threads(18)
+        #pragma omp parallel for reduction(max:maxdiff)
         for (std::size_t i = 0; i < n; ++i) {
             double old = x[i];
             double val = b - off * (sum_x - old);
@@ -34,7 +35,7 @@ static void jacobi(
             if (d > maxdiff) maxdiff = d;
         }
         err = maxdiff;
-        if (err < tol) teste = 1;
+        if (err < tol) break;
     }
 
 }
@@ -105,7 +106,8 @@ int main() {
 
     auto t0 = std::chrono::high_resolution_clock::now();
     int iters = 0; double err = 0.0;
-    jacobi(n, alpha, max_iter, tol, iters, err);
+    // jacobi(n, alpha, max_iter, tol, iters, err);
+    jacobi_multi_parallel(n, alpha, max_iter, tol, iters, err);
     auto t1 = std::chrono::high_resolution_clock::now();
 
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
